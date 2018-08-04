@@ -1,9 +1,8 @@
-@section('header')
   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="{{ route('admin-index')}}" class="logo">
+    <a href="{{ route('admin-dashboard')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">ST</span>
       <!-- logo for regular state and mobile devices -->
@@ -168,4 +167,3 @@
       </div>
     </nav>
   </header>
-@endsection

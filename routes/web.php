@@ -15,4 +15,9 @@
 //     return view('welcome');
 // });
 
-Route::get('/admin', 'AdminController@index')->name('admin-index');
+
+Auth::routes();
+
+Route::get('/admin/dashboard', 'AdminController@index')->name('admin-dashboard');
+Route::get('/admin/transaksi', 'AdminController@transaksi')->name('admin-transaksi');
+Route::get('/home', 'HomeController@index')->name('home');

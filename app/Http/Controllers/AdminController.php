@@ -8,7 +8,7 @@ use Auth;
 class AdminController extends Controller
 {
     public function __construct(){
-      Auth::guard();
+      $this->middleware('auth:admin');
     }
 
     /**

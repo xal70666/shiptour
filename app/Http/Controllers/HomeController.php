@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Destinasi;
+use App\Kapal;
+use App\Penumpang;
+use App\Transaksi;
+use App\TransaksiDetail;
+use App\Perjalanan;
+use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -13,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +31,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $destinasi = Destinasi::all();
+        return view('index', compact('destinasi'));
+    }
+
+    public function search(Request $request) {
+      $from = $request->from;
+      $to = $request->to;
+      $tgl_berangkat = $request->departure;
+
+      return view('hasil');
     }
 }

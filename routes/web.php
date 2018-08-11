@@ -18,12 +18,10 @@
 
 Auth::routes();
 
-Route::get('/', function(){
-  return 'tidak ada yg login';
-});
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::post('/hasil', 'HomeController@search')->name('pesan');
 Route::post('/logout', 'Auth\LoginController@userLogout')->name('user.logout');
-
 
 Route::prefix('admin')->group(function(){
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');

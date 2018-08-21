@@ -18,9 +18,13 @@
 
 Auth::routes();
 
+// Route::get('/chained_dopdown/getCities/{param}','HomeController@getCities');
+
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/hasil', 'HomeController@search')->name('pesan');
+Route::get('/getTo/{param}','HomeController@getTo');
+Route::get('/available','HomeController@getTo');
+Route::post('/available', 'HomeController@available')->name('available');
 Route::post('/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::prefix('admin')->group(function(){

@@ -26,7 +26,7 @@ class TransaksiDetail extends Model
     return $this->belongsTo('App\Transaksi', 'id_transaksi');
   }
 
-  public function perjalanan(){
-    return $this->belongsTo('App\Perjalanan', 'id_perjalanan');
-  }
+  // public function perjalanan(){
+  //   return $this->belongsTo('App\Perjalanan', 'id_perjalanan');
+  // }
 }

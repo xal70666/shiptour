@@ -59,6 +59,26 @@
                 </div>
               </div>
               <div class="cl3">
+                <label for="dewasa">Dewasa</label>
+                <div class="of-box">
+                  <select class="" name="dewasa">
+                    @for ($i=1; $i < 100; $i++)
+                      <option value="{{$i}}">{{$i}}</option>
+                    @endfor
+                  </select>
+                </div>
+              </div>
+              <div class="cl4">
+                <label for="anak">Anak</label>
+                <div class="of-box">
+                  <select class="" name="anak">
+                    @for ($i=0; $i < 100; $i++)
+                      <option value="{{$i}}">{{$i}}</option>
+                    @endfor
+                  </select>
+                </div>
+              </div>
+              {{-- <div class="cl3">
                 <label for="pp">Pulang</label>
                 <div class="of-box">
                   <input type="checkbox" id="pp" onclick="jikaPP()">
@@ -69,7 +89,7 @@
                 <div class="of-box">
                   <input type="text" name="arrival" id="datepicker-arrival">
                 </div>
-              </div>
+              </div> --}}
               {{-- <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="Enter email">

@@ -3,7 +3,6 @@ $(document).ready(function(){
     var host = window.location.href;
 
    $("#from").change(function() {
-     alert('masuk normal');
 
             $.getJSON(host + "/getTo/" + $("#from option:selected").val(), function(data) {
              //console.log(data);
@@ -28,8 +27,7 @@ $(document).ready(function(){
         });
 
   $("#from_avail").change(function() {
-    alert('masuk avail');
-           $.getJSON(host + "/getTo/" + $("#from_avail option:selected").val(), function(data) {
+           $.getJSON(host + "getTo/" + $("#from_avail option:selected").val(), function(data) {
             //console.log(data);
                var temp = [];
                //CONVERT INTO ARRAY

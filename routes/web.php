@@ -23,8 +23,9 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/getTo/{param}','HomeController@getTo');
-Route::get('/available','HomeController@getTo');
+// Route::get('/available','HomeController@getTo');
 Route::post('/available', 'HomeController@available')->name('available');
+Route::post('/booking', 'HomeController@booking')->name('booking');
 Route::post('/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::prefix('admin')->group(function(){

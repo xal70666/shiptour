@@ -1,5 +1,10 @@
 @extends('template')
 @section('content')
+  @php
+    date_default_timezone_set('Asia/Jakarta');
+    $jam = date("h:i:s");
+    $tanggal = date("Y-m-d");
+  @endphp
 
       <!-- Header -->
       {{-- <header class="masthead">
@@ -14,93 +19,76 @@
 
       <!-- Slider -->
       <div class="swiper-container main-slider" id="myCarousel">
-          <div class="oneform">
-            <form class="form-inline" role="form" id="form-oneform" method="post" action="{{ route('available')}}">
-              {{csrf_field()}}
-              <div class="cl1">
-                <label for="from">From</label>
-                <div class="of-box">
-                  <select id="from" name="from">
-                    {{-- @foreach ($destinasi as $key => $value)
-                      <option>{{$value->nama}}</option>
-                    @endforeach --}}
+        <div class="oneform">
+          <div class="container">
 
-                    @foreach($destinasi as $value)
+            <form  role="form" id="form-oneform" method="post" action="{{ route('available')}}">
+                {{csrf_field()}}
+
+                <div class="form-inline">
+                  <div class="form-group">
+                    <select id="from" name="from" class="form-control" placeholder="asda">
+                      <optgroup label="From">
+                      @foreach($destinasi as $value)
                         <option value="{{$value->id_destinasi}}">{{$value->nama}}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-              {{-- <div class="cl5">
-                <label for="kapal">Fastboat</label>
-                <div class="of-box">
-                  <select id="kapal" name="kapal">
-                    @foreach ($kapal as $key => $value)
-                      <option value="{{ $value->id_kapal }}">{{ $value->nama_kapal }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div> --}}
-              <div class="cl2">
-                <label for="to">To</label>
-                <div class="of-box">
-                  <select id="to" name="to">
-                    {{-- @foreach ($destinasi as $key => $value)
-                      <option>{{ $value->nama }}</option>
-                    @endforeach --}}
-                    <option value="">NA</option>
-                  </select>
-                </div>
-              </div>
-              <div class="cl2">
-                <label for="departure">Departure</label>
-                <div class="of-box">
-                  <input type="text" name="departure" id="datepicker-departure">
-                </div>
-              </div>
-              <div class="cl3">
-                <label for="dewasa">Dewasa</label>
-                <div class="of-box">
-                  <select class="" name="dewasa">
-                    @for ($i=1; $i < 100; $i++)
-                      <option value="{{$i}}">{{$i}}</option>
-                    @endfor
-                  </select>
-                </div>
-              </div>
-              <div class="cl4">
-                <label for="anak">Anak</label>
-                <div class="of-box">
+                      @endforeach
+                      </optgroup>
+                    </select>
+                    @if ($errors->has('from'))
+                      <span class="help-block" style="color: #721c24;"> {{ $errors->first('from') }}</span>
+                    @endif
+                  </div>
+
+                  <div class="form-group" style="margin-right: 10px;">
+                    <select id="to" name="to" class="form-control">
+                      <optgroup label="To">
+                      @foreach($destinasi as $value)
+                        <option value="{{$value->id_destinasi}}">{{$value->nama}}</option>
+                      @endforeach
+                    </optgroup>
+                    </select>
+                    @if ($errors->has('to'))
+                      <span class="help-block" style="color: #721c24;"> {{ $errors->first('to') }}</span>
+                    @endif
+                  </div>
+
+                  <div class="form-group" style="margin-right: 10px;">
+                    {{-- <label for="departure">Departure</label> --}}
+                    <input type="text" name="departure" id="datepicker-departure" value="{{$tanggal}}" class="form-control">
+                    @if ($errors->has('departure'))
+                      <span class="help-block" style="color: #721c24;"> {{ $errors->first('departure') }}</span>
+                    @endif
+                  </div>
+
+                    <div class="form-group" style="margin-right: 10px;">
+
+                      <select name="dewasa" id="dewasa" class="form-control">
+                        <optgroup label="Person">
+                        @for ($i=1; $i < 70; $i++)
+                          <option value="{{$i}}">{{$i}}</option>
+                        @endfor
+                      </optgroup>
+
+                      </select>
+                    </div>
+
+
+
+                  {{-- <label for="anak">Anak</label>
                   <select class="" name="anak">
                     @for ($i=0; $i < 100; $i++)
                       <option value="{{$i}}">{{$i}}</option>
                     @endfor
-                  </select>
+                  </select> --}}
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-info">Search</button>
+                  </div>
                 </div>
-              </div>
-              {{-- <div class="cl3">
-                <label for="pp">Pulang</label>
-                <div class="of-box">
-                  <input type="checkbox" id="pp" onclick="jikaPP()">
-                </div>
-              </div>
-              <div class="cl4">
-                <label for="arrival">Arrival</label>
-                <div class="of-box">
-                  <input type="text" name="arrival" id="datepicker-arrival">
-                </div>
-              </div> --}}
-              {{-- <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="pwd">Password</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-              </div> --}}
-              <button type="submit" class="btn btn-default">Pesan</button>
-            </form>
+
+              </form>
+          </div>
         </div>
+
         <div class="swiper-wrapper">
           {{-- <div class="swiper-slide slider-bg-position" style="background:url('http://grafreez.com/wp-content/temp_demos/burnout/img/1.jpg')" data-hash="slide1"> --}}
           <div class="swiper-slide slider-bg-position" style="background:url('{{ asset('/images/1.jpg')}}'); background-repeat: no-repeat;
@@ -122,6 +110,7 @@
         <div class="swiper-button-prev"><i class="fa fa-chevron-left"></i></div>
         <div class="swiper-button-next"><i class="fa fa-chevron-right"></i></div>
       </div>
+
 
 
       <!-- Services -->

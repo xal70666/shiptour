@@ -8,10 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ShipTour</title>
+    <title>JT-Indonesia.com</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/agency/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.css')}}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
@@ -29,8 +30,17 @@
     <script src="{{ asset('js/jquery.min.js')}}"></script>
 
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
+    <style type="text/css">
+   .ui-datepicker {
+      background: #333;
+      border: 1px solid #555;
+      color: #EEE;
+    }
+    .ui-icon-circle-triangle-w { background-position: -80px -192px; background-color: #007bff;}
+    .ui-icon-circle-triangle-e { background-position: -80px -192px; background-color: #007bff;}
 
+   </style>
   </head>
 
   <body id="page-top">
@@ -38,7 +48,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">ShipTour</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">JT-Indonesia.com</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -91,6 +101,7 @@
     <script type="text/javascript">
     $( "#datepicker-departure" ).datepicker({
       dateFormat: "yy-mm-dd",
+      minDate: 0,
       weekStart: 0,
       calendarWeeks: true,
       autoclose: true,

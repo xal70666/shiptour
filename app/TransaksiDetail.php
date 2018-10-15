@@ -10,6 +10,12 @@ class TransaksiDetail extends Model
 
   protected $fillable =[
     'id_transaksi',
+    'harga',
+    'harga_total',
+    'status_bayar',
+    'departure',
+    'arrival',
+    'batas_pembayaran',
     'id_penumpang',
     'id_perjalanan',
   ];
@@ -19,7 +25,7 @@ class TransaksiDetail extends Model
   }
 
   public function penumpang(){
-    return $this->belongsTo('App\Penumpang', 'id_penumpang');
+    return $this->belongsToMany('App\Penumpang', 'id_penumpang');
   }
 
   public function transaksi(){

@@ -1,11 +1,22 @@
 .oneform {
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 0;
     width: 100%;
-    height: 10%;
+    height: 20%;
     background-color: rgba(34,34,0,0.15);
-    z-index: 20;
+    z-index: 50;
+    color: #fff;
+}
+
+.oneform2 {
+    position: absolute;
+    top: 14%;
+    left: 0;
+    width: 100%;
+    height: 22%;
+    background-color: rgba(34,34,0,0.15);
+    z-index: 50;
     color: #fff;
 }
 
@@ -13,7 +24,7 @@
   margin-top: 10px;
   width: 85%;
   margin-right:auto;
-  margin-left:auto;
+  margin-left: 15%;
 }
 
 #from {

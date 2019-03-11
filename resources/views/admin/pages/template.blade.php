@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
+  <title>JTINDONESIA | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
@@ -17,6 +17,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/handsontable.full.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -32,6 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Google Font -->
   <link rel="stylesheet" href="{{asset('css/font-sans-pro.css')}}">
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -64,10 +70,12 @@ desired effect
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="{{asset('images/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+            {{-- <img src="{{asset('images/user2-160x160.jpg')}}" class="img-circle" alt="User Image"> --}}
+            <i style="color: #b8c7ce" class="fa fa-user"></i>
+
           </div>
           <div class="pull-left info">
-            <p>Alexander Pierce</p>
+            <p>{{Auth::user()->name}}</p>
             <!-- Status -->
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
@@ -89,14 +97,11 @@ desired effect
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">ADMIN MENU</li>
           <!-- Optionally, you can add icons to the links -->
-          @if ($pages = 'dashboard')
-            <li class="active"><a href="{{ route('admin-dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li><a href="{{ route('admin-transaksi') }}"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
-          @endif
-          @if ($pages = 'transaksi')
-            <li><a href="{{ route('admin-dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class="active"><a href="{{ route('admin-transaksi') }}"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
-          @endif
+          <li><a href="{{ route('admin-dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href="{{ route('kapal') }}"><i class="fa fa-ship"></i> <span>Kapal</span></a></li>
+          <li><a href="{{ route('admin-transaksi') }}"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+          <li><a href="{{ route('trs-penumpang') }}"><i class="fa fa-user"></i> <span>Penumpang</span></a></li>
+          <li><a href="{{ route('lap-trs') }}"><i class="fa fa-money"></i> <span>Laporan Transaksi</span></a></li>
 
           <li class="treeview">
             <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
@@ -110,6 +115,36 @@ desired effect
             </ul>
           </li>
         </ul>
+
+        {{-- <ul class="sidebar-menu" data-widget="tree">
+          <li class="header">ADMIN MENU</li>
+          <!-- Optionally, you can add icons to the links -->
+          @if ($pages = 'dashboard')
+            <li class="active"><a href="{{ route('admin-dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li><a href="{{ route('admin-transaksi') }}"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+          @endif
+          @if ($pages = 'transaksi')
+            <li><a href="{{ route('admin-dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li class="active"><a href="{{ route('admin-transaksi') }}"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+          @endif
+          @if ($pages = 'penumpang')
+            <li><a href="{{ route('admin-dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li><a href="{{ route('admin-transaksi') }}"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+            <li class="active"><a href="{{ route('trs-penumpang') }}"><i class="fa fa-user"></i> <span>Penumpang</span></a></li>
+          @endif
+
+          <li class="treeview">
+            <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="#">Link in level 2</a></li>
+              <li><a href="#">Link in level 2</a></li>
+            </ul>
+          </li>
+        </ul> --}}
         <!-- /.sidebar-menu -->
       </section>
       <!-- /.sidebar -->
@@ -228,11 +263,142 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery 3 -->
 <script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+
+<script src="{{asset('js/handsontable.full.min.js')}}"></script>
+<script src="{{ asset('js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<script src="{{asset('js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('js/datatables.min.js')}}"></script>
+
+
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('js/adminlte.min.js')}}"></script>
+<script src="{{ asset('js/jquery.jgrowl.min.js')}}"></script>
+<script>
 
+// remember sidebar
+// ==================
+$.AdminLTESidebarTweak = {};
+
+$.AdminLTESidebarTweak.options = {
+    EnableRemember: true,
+    NoTransitionAfterReload: false
+    //Removes the transition after page reload.
+};
+
+$(function () {
+    "use strict";
+
+    $("body").on("collapsed.pushMenu", function(){
+        if($.AdminLTESidebarTweak.options.EnableRemember){
+            var toggleState = 'opened';
+            if($("body").hasClass('sidebar-collapse')){
+                toggleState = 'closed';
+            }
+            document.cookie = "toggleState="+toggleState;
+        }
+    });
+
+    if($.AdminLTESidebarTweak.options.EnableRemember){
+        var re = new RegExp('toggleState' + "=([^;]+)");
+        var value = re.exec(document.cookie);
+        var toggleState = (value != null) ? unescape(value[1]) : null;
+        if(toggleState == 'closed'){
+            if($.AdminLTESidebarTweak.options.NoTransitionAfterReload){
+                $("body").addClass('sidebar-collapse hold-transition').delay(100).queue(function(){
+                    $(this).removeClass('hold-transition');
+                });
+            }else{
+                $("body").addClass('sidebar-collapse');
+            }
+        }
+    }
+});
+
+// ===================
+
+
+// =============
+
+// =============
+
+// confirm delete kapal
+// var el = document.getElementById('kapal-table');
+//
+// el.addEventListener('submit', function(){
+//     return confirm('Are you sure you want to delete ?');
+// }, false);
+
+
+$(document).ready(function() {
+  var table = $('#trs-table').DataTable();
+
+} );
+
+
+
+$(document).ready(function() {
+  $('#pernumpang-table').DataTable();
+} );
+
+$(document).ready(function(){
+  $('#kapal-table').DataTable();
+});
+
+$(document).ready(function(){
+  $('#lap-trs-table').DataTable();
+});
+
+$(document).ready(function(){
+  $('#example').DataTable();
+});
+
+/* Custom filtering function which will search data in column four between two values */
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = parseInt( $('#min').val(), 10 );
+        var max = parseInt( $('#max').val(), 10 );
+        var age = parseFloat( data[3] ) || 0; // use data for the age column
+
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && age <= max ) ||
+             ( min <= age   && isNaN( max ) ) ||
+             ( min <= age   && age <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+
+    // Event listener to the two range filtering inputs to redraw on input
+    $('#min, #max').keyup( function() {
+        table.draw();
+    } );
+} );
+</script>
+
+<script type="text/javascript">
+$.jGrowl("A message that will live a little longer.", { life: 10000 });
+
+function tampil_pesan(e, f) {
+           if (e == 'berhasil') {
+               $.jGrowl(f, { theme: 'growl-success', header: 'Success !', life: 10000 });
+           } else if (e == 'gagal') {
+               $.jGrowl(f, { theme: 'growl-error', header: 'Error !', life: 10000 });
+           } else if (e == 'info') {
+               $.jGrowl(f, { header: 'Notification !', life: 10000 });
+           } else {
+           }
+       }
+</script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

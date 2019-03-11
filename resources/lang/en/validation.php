@@ -103,6 +103,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'backdate' => [
+            'notbackdate' => 'Can\'t order tickets before today.',
+        ],
     ],
 
     /*

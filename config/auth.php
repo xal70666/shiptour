@@ -51,7 +51,7 @@ return [
             'provider' => 'admins',
         ],
 
-        'admin-' => [
+        'admin-api' => [
             'driver' => 'token',
             'provider' => 'admins',
         ],

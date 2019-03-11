@@ -2,9 +2,9 @@
 @section('content')
   {{-- @include('email.payment_email') --}}
   <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+    // if ( window.history.replaceState ) {
+    //     window.history.replaceState( null, null, window.location.href );
+    // }
 </script>
 <style media="screen">
 .content {
@@ -238,14 +238,50 @@ background-color: #fff;
             right: auto;
         }
 }
+
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    margin-top: -50px;
+    margin-left: auto;
+    margin-bottom: 20px;
+  }
+
+  .sidebar2 {
+    width: 100%;
+    margin-left: auto;
+    margin-bottom: 20px;
+  }
+
+  .sidebar3 {
+    width: 100%;
+    margin-left: auto;
+  }
+
+  .review-order {
+    margin-top: -100px;
+  }
+
+  .sidebar5 {
+    margin-top: 520px;
+    margin-left: 10px;
+  }
+
+  .title-time {
+    margin-left: inherit;
+  }
+}
 </style>
 <section id="services" style="margin-top: 100px">
   <div class="container">
 
+    <div class="review-order">
+      <h3 style="color: #007bff;">Review your order</h3>
+    </div>
 
     <div class="form-horizontal" style="margin-top: 100px;">
-      <h3 style="color: #007bff;">Review your order</h3>
-      <hr>
+
       <div class="pull-right sidebar" >
         <h6 style="color: #007bff;">Price Detail</h6>
         <hr>
@@ -295,48 +331,56 @@ background-color: #fff;
           </div>
         </div>
 
-        <div class="panel panel-info">
-          {{-- <div class="panel-heading"><span class="label label-default" style="color: #fec810;"><b>Passenger {{$i+1}}</b></span></div> --}}
-          <div class="panel-body">
-              <div class="form-group">
-                <div class="row">
-                </div>
-                <div class="row">
-                  <div class="col-md-10">
-                    @foreach ($kapal as $key => $value)
-                      @if ($value->id_kapal == $id_kapal)
-                        <img src="/images/icon-ship.ico" alt="" width="30px" height="30px"><b> <p style="float: center;">Fast Boat : {{ $value->nama_kapal}}</p></b>
-                      @endif
-                    @endforeach
-                    <ul class="timeline">
-                     <li>
-                       <div class="timeline-badge info"><i class="glyphicon glyphicon-check"></i></div>
-                       {{-- <div class="timeline-panel"> --}}
-                         <div class="timeline-heading from" style="float: right;">
-                           <h4 class="timeline-title">{{$from->nama}}</h4>
-                           @foreach ($data_perjalanan as $key => $time)
-                           @endforeach
-                           <p><small class="text-muted">{{$departure}} {{date('H:i', strtotime($time->jam))}}</small></p>
-                         </div>
-                         {{-- <div class="timeline-body">
-                           <p>Mussum ipsum cacilds, vidis litro abertis. C.</p>
-                         </div> --}}
-                       {{-- </div> --}}
-                     </li>
-                     <li class="timeline-inverted">
-                       <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
-                       {{-- <div class="timeline-panel"> --}}
-                         <div class="timeline-heading to" style="float: right;">
-                           <h4 class="timeline-title">{{$to->nama}}</h4>
-                           <p><small class="text-muted">{{$departure}} {{date('H:i', strtotime($value->jam) + 3600)}}</small></p>
-                         </div>
-                       {{-- </div> --}}
-                     </li>
+
+    </div>
+
+    <div class="row sidebar5">
+      @foreach ($kapal as $key => $value)
+        @if ($value->id_kapal == $id_kapal)
+          <img src="/images/icon-ship.ico" alt="" width="30px" height="30px"><b> <p style="float: center;">Fast Boat : {{ $value->nama_kapal}}</p></b>
+        @endif
+      @endforeach
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sidebar4">
+          <div class="panel panel-info">
+            {{-- <div class="panel-heading"><span class="label label-default" style="color: #fec810;"><b>Passenger {{$i+1}}</b></span></div> --}}
+            <div class="panel-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-10 title-time">
+
+                      <ul class="timeline">
+                       <li>
+                         <div class="timeline-badge info"><i class="glyphicon glyphicon-check"></i></div>
+                         {{-- <div class="timeline-panel"> --}}
+                           <div class="timeline-heading from" style="float: right;">
+                             <h4 class="timeline-title">{{$from->nama}}</h4>
+                             @foreach ($data_perjalanan as $key => $time)
+                             @endforeach
+                             <p><small class="text-muted">{{$departure}} {{date('H:i', strtotime($time->jam))}}</small></p>
+                           </div>
+                           {{-- <div class="timeline-body">
+                             <p>Mussum ipsum cacilds, vidis litro abertis. C.</p>
+                           </div> --}}
+                         {{-- </div> --}}
+                       </li>
+                       <li class="timeline-inverted">
+                         <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
+                           <div class="timeline-heading to" style="float: right;">
+                             <h4 class="timeline-title">{{$to->nama}}</h4>
+                             <p><small class="text-muted">{{$departure}} {{date('H:i', strtotime($time->jam) + 3600)}}</small></p>
+                           </div>
+                       </li>
+                    </div>
                   </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
 
     <div class="row">
@@ -401,15 +445,16 @@ background-color: #fff;
       <div class="col-md-8">
         <div class="pull-right sidebar3" >
           <div class="panel panel-primary">
-            <p> We are waiting for your payment, please transfer a total of IDR {{number_format($total_harga, 2, ',', '.')}} with the payment deadline until : <b> {{ $batas_pembayaran}} </b> </p>
+            <p> We are waiting for your payment, please transfer a total of IDR {{number_format($total_harga, 2, ',', '.')}} with the payment deadline until : <b> {{ date("d-M-y H:i",strtotime($batas_pembayaran))}} </b> </p>
             <p> To complete your order, please follow the instructions below : </ p>
 
             <ol>
-              <li> Make a payment of IDR {{number_format($total_harga, 2, ',', '.')}} before the time limit for the message specified in the BNI account {{ $no_rek }} In the name of Baihaqi </li>
-              <li> Confirm your payment by sending proof of payment via email <b> toursship@gmail.com </b> </li>
+              <li> Make a payment of IDR {{number_format($total_harga, 2, ',', '.')}} before the time limit for the message specified in the BRI account <b>4611-01-008456-53-9</b> In the name of <b>Iwayan Budiarta</b> </li>
+              <li> Confirm your payment by sending proof of payment via email <b> <a href="mailto:info@jtindonesia.com">info@jtindonesia.com</a> </b> </li>
               <li> Within a maximum of 12 hours our team will verify your transfer proof. </li>
-              <li> Your order will be canceled automatically if the transfer deadline starts when this order is made, ie 1 hour from the order or does not provide proof of transfer for 1 hour. </li>
+              <li> Your order will be canceled automatically if the transfer deadline starts when this order is made, witch is 1 hour from the order or does not provide proof of transfer for 1 hour. </li>
             </ol>
+            <p class="muted">Please check your email inbox or in spam.</p>
           </div>
         </div>
       </div>
@@ -417,88 +462,6 @@ background-color: #fff;
   </div>
 </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">Contact Us</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <form id="contactForm" name="sentMessage" novalidate>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input class="form-control" id="name" type="text" placeholder="Your Name *" required data-validation-required-message="Please enter your name.">
-                  <p class="help-block text-danger"></p>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" id="email" type="email" placeholder="Your Email *" required data-validation-required-message="Please enter your email address.">
-                  <p class="help-block text-danger"></p>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required data-validation-required-message="Please enter your phone number.">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <textarea class="form-control" id="message" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="col-lg-12 text-center">
-                <div id="success"></div>
-                <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Send Message</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Your Website 2017</span>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fa fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fa fa-facebook"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fa fa-linkedin"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline quicklinks">
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  @include('contact')
+  @include('footer')
 @endsection

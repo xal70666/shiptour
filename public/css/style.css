@@ -1,23 +1,26 @@
 .oneform {
     position: absolute;
-    top: 40%;
-    left: 0;
-    width: 100%;
-    height: 20%;
-    background-color: rgba(34,34,0,0.15);
+    border-radius: 15px;
+
+    top: 65%;
+    left: 10%;
+    width: 80%;
+    height: auto;
+    /* background-color: rgba(34,34,0,0.15); */
+    background-color: #ffffff;
+    /* margin-left: 60px; */
     z-index: 50;
-    color: #fff;
+
 }
 
 .oneform2 {
     position: absolute;
-    top: 14%;
+    top: 20%;
     left: 0;
     width: 100%;
     height: 22%;
     background-color: rgba(34,34,0,0.15);
     z-index: 50;
-    color: #fff;
 }
 
 #form-oneform{

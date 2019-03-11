@@ -1,11 +1,11 @@
 @extends('template')
 @section('content')
   <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+    // if ( window.history.replaceState ) {
+    //     window.history.replaceState( null, null, window.location.href );
+    // }
 </script>
-  <style media="screen">
+  <style media="screen" type="text/css">
   .content {
     width: 600px;
 }
@@ -29,11 +29,23 @@
   color: #fff;
   background-color: #fff;
 }
-@php
+
+
+/*  */
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    margin-top: -110px;
+    margin-left: auto;
+    margin-bottom: 20px;
+  }
+
+}
+  </style>
+  @php
   $harga_dewasa = 0;
   $harga_anak = 0;
 @endphp
-  </style>
   <section id="services" style="margin-top: 100px">
     <div class="container">
     <div class="pull-right sidebar" >
@@ -51,7 +63,7 @@
             <div class="col-md-6">
               <p>Adult x{{$dewasa}}</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 price-dtl">
               @foreach ($data_perjalanan as $key => $value)
                 @php
                   $harga_dewasa = $value->harga_dewasa;
@@ -121,7 +133,11 @@
                 </select>
               </div>
               <div class="col-md-6">
-                <input class="form-control" id="name_order" name="name_order" placeholder="Name" type="text" required>
+                @if (Auth::user())
+                  <input class="form-control" id="name_order" name="name_order" placeholder="Name" type="text" value="{{Auth::user()->name}}">
+                @else
+                  <input class="form-control" id="name_order" name="name_order" placeholder="Name" type="text" required>
+                @endif
               </div>
             </div>
         </div>
@@ -141,7 +157,11 @@
               <label for="email_order">Email</label>
             </div>
             <div class="col-md-8">
-              <input type="email_order" class="form-control" id="email_order" name="email_order" placeholder="Email">
+              @if (Auth::user())
+                <input type="email_order" class="form-control" id="email_order" name="email_order" placeholder="Email" value="{{Auth::user()->email}}">
+              @else
+                <input type="email_order" class="form-control" id="email_order" name="email_order" placeholder="Email" required>
+              @endif
             </div>
           </div>
         </div>
@@ -149,7 +169,7 @@
     {{-- endform-horizontal --}}
 
 
-    <div class="form-horizontal" style="margin-top: 100px;">
+    <div class="form-horizontal pass-sec" style="margin-top: 100px;">
       <h3 style="color: #007bff;">Passenger Details</h3>
       <hr>
       @for ($i=0; $i < $total_penumpang; $i++)
@@ -186,21 +206,26 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-sm-2">
-                  <label for="no_id{{$i+1}}">Number ID</label>
+                  <label for="no_id{{$i+1}}">ID Number</label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control" id="no_id{{$i+1}}" name="no_id{{$i+1}}" placeholder="Number ID" required>
+                  <input type="number" class="form-control" id="no_id{{$i+1}}" name="no_id{{$i+1}}" placeholder="ID Number" required>
                   <span class="help-block"><small>ID number is filled in according to KTP / Passport / SIM</small></span>
                 </div>
               </div>
             </div>
-            <span class="help-block"><small>Name & Number ID must be in accordance with KTP / Passport / SIM (without punctuation and degree)</small></span>
+            <span class="help-block"><small>Name & ID Number must be in accordance with KTP / Passport / SIM (without punctuation and degree)</small></span>
           </div>
         </div>
         <hr>
       @endfor
 
       <input type="text" name="tgl_berangkat" value="{{$tgl_berangkat}}" style="display: none;">
+      @if (Auth::user())
+        <input type="text" name="id_pemesan" value="{{Auth::user()->id}}" style="display: none;">
+      @else
+        <input type="text" name="id_pemesan" value="0" style="display: none;">
+      @endif
       <input type="text" name="departure" value="{{$departure}}" style="display: none;">
       <input type="text" name="total_penumpang" value="{{$total_penumpang}}" style="display: none;">
       <input type="text" name="from" value="{{$from}}" style="display: none;">
@@ -221,89 +246,6 @@
     </div>
     {{-- end container --}}
   </section>
-  <!-- Contact -->
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">Contact Us</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <form id="contactForm" name="sentMessage" novalidate>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input class="form-control" id="name" type="text" placeholder="Your Name *" required data-validation-required-message="Please enter your name.">
-                  <p class="help-block text-danger"></p>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" id="email" type="email" placeholder="Your Email *" required data-validation-required-message="Please enter your email address.">
-                  <p class="help-block text-danger"></p>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required data-validation-required-message="Please enter your phone number.">
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <textarea class="form-control" id="message" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
-                  <p class="help-block text-danger"></p>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="col-lg-12 text-center">
-                <div id="success"></div>
-                <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Send Message</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Your Website 2017</span>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fa fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fa fa-facebook"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fa fa-linkedin"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline quicklinks">
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
+  @include('contact')
 @endsection

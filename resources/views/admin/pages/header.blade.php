@@ -4,9 +4,9 @@
     <!-- Logo -->
     <a href="{{ route('admin-dashboard')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">ST</span>
+      <span class="logo-mini">JT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">ShipTour</span>
+      <span class="logo-lg">JTIndonesia.com</span>
     </a>
 
     <!-- Header Navbar -->
@@ -34,7 +34,8 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="{{asset('images/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                        {{-- <img src="{{asset('images/user2-160x160.jpg')}}" class="img-circle" alt="User Image"> --}}
+                        <i class="fa fa-user"></i>
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -119,9 +120,11 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="{{asset('images/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              {{-- <img src="{{asset('images/user2-160x160.jpg')}}" class="user-image" alt="User Image"> --}}
+              <i class="fa fa-user"></i>
+
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{Auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -129,8 +132,8 @@
                 <img src="{{asset('images/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  JTIndonesia.com
+                  <small>2018</small>
                 </p>
               </li>
               <!-- Menu Body -->
